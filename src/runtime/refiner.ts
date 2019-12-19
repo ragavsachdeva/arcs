@@ -11,11 +11,11 @@
 import {Refinement, SchemaPrimitiveType, RefinementExpression} from './manifest-ast-nodes.js';
 import {Dictionary} from './hot.js';
 import {assert} from '../platform/assert-node.js';
-import { Entity } from './entity.js';
-import { Schema } from './schema.js';
+import {Entity} from './entity.js';
+import {Schema} from './schema.js';
 
 export class Refiner {
-    // Converts refinement ast-node to string. 
+    // Converts refinement ast-node to string.
     // Ast-nodes are typically interfaces with no behaviour.
     static refinementString(refinement: Refinement): string {
         if (!refinement) {
