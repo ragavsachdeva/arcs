@@ -31,8 +31,22 @@ export class Refiner {
         return expr.value.toString();
     }
 
-    // tslint:disable-next-line: no-any
-    static refineData(refinement, data): boolean {
+    static refineData(entity, schema): void {
+        for (const [name, value] of Object.entries(entity)) {
+            const refDict = {}; refDict[name] = value;
+            if (!Refiner.isValidData(schema.fields[name].refinement, refDict)) {
+                throw new Error(`Entity schema field '${name}' does not conform to the refinement.`);
+            }
+        }
+        if (!Refiner.isValidData(schema.refinement, entity)) {
+            throw new Error('Entity data does not conform to the refinement.');
+        }
+    }
+
+    static isValidData(refinement, data): boolean {
+        if (!refinement) {
+            return true;
+        }
         const result = Refiner.applyRefinement(refinement.expression, data);
         if (result instanceof Error) {
             throw result;
