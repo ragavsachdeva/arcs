@@ -11,6 +11,8 @@
 import {Refinement, SchemaPrimitiveType, RefinementExpression} from './manifest-ast-nodes.js';
 import {Dictionary} from './hot.js';
 import {assert} from '../platform/assert-node.js';
+import { Entity } from './entity.js';
+import { Schema } from './schema.js';
 
 export class Refiner {
     // Converts refinement ast-node to string. 
@@ -31,7 +33,7 @@ export class Refiner {
         return expr.value.toString();
     }
 
-    static refineData(entity, schema): void {
+    static refineData(entity: Entity, schema: Schema): void {
         for (const [name, value] of Object.entries(entity)) {
             const refDict = {}; refDict[name] = value;
             if (!Refiner.isValidData(schema.fields[name].refinement, refDict)) {
@@ -43,7 +45,7 @@ export class Refiner {
         }
     }
 
-    static isValidData(refinement, data): boolean {
+    static isValidData(refinement: Refinement, data: Dictionary<boolean|number>): boolean {
         if (!refinement) {
             return true;
         }
@@ -56,7 +58,7 @@ export class Refiner {
         return result;
     }
 
-    private static applyRefinement(expr, data): number | boolean | Error {
+    private static applyRefinement(expr: RefinementExpression, data: Dictionary<boolean|number>): number | boolean | Error {
         if (expr.kind === 'binary-expression-node') {
             const left = Refiner.applyRefinement(expr.leftExpr, data);
             const right = Refiner.applyRefinement(expr.rightExpr, data);
@@ -82,7 +84,7 @@ export class Refiner {
                 return new Error(`Unresolved field name '${expr.value}' in the refinement expression.`);
             }
         }
-        return new Error(`Unsupported expression node of type ${expr.kind}`);
+        return new Error(`Unsupported expression ${expr}`);
     }
 
     private static applyOperator(op, expr) {
