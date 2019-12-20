@@ -27,5 +27,9 @@ import '5_Collections/Collections.arcs'
 // Adding a JSON data store.
 import '6_JsonStore/JsonStore.arcs'
 
+// Tutorial 7: JSON Store
+// Adding refinements on types.
+import '7_RefinementTypes/RefinementTypes.arcs'
+
 // Demo the tutorials lead to
 import 'Demo/TTTGame.arcs'
