@@ -15,9 +15,8 @@
 
 defineParticle(({SimpleParticle, html}) => {
 
-  const template = html`Hello, <span>{{name1}}</span> <span>{{name2}}</span>!
-  <div slotid="inputSlot1"></div>
-  <div slotid="inputSlot2"></div>`;
+  const template = html`Hello, <span>{{num1}}</span>!
+  <div slotid="inputSlot1"></div>`;
 
   return class extends SimpleParticle {
     get template() {
@@ -25,17 +24,17 @@ defineParticle(({SimpleParticle, html}) => {
     }
 
     // We need the person handle within shouldRender, so it has to be passed in.
-    shouldRender({person1, person2}) {
+    shouldRender({person1}) {
       // Here we check that the person is defined.
-      return person1 || person2;
+      return person1;
     }
 
     // Just like with shouldRender, we need access to person, so declare it needs to be passed in.
-    render({person1, person2}) {
-      // We want the name from person to be interpolated into the template.
+    render({person1}) {
+      // We want the num from person to be interpolated into the template.
+      console.log(person1);
       return {
-        name1: person1.name,
-        name2: person2.name
+        num1: person1 && person1.num || 0
       };
     }
   };

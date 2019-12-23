@@ -21,6 +21,7 @@ import {BigCollectionType, CollectionType, Type} from './type.js';
 import {SerializedEntity} from './entity.js';
 import {Store, SingletonStore, CollectionStore, BigCollectionStore} from './store.js';
 import {Id} from './id.js';
+import { Dictionary } from 'express-serve-static-core';
 
 enum SyncState {none, pending, full}
 
@@ -409,7 +410,11 @@ export class CollectionProxy extends StorageProxy implements CollectionStore {
  * notified about as these reflect concurrent writes that did not 'win'.
  */
 export class SingletonProxy extends StorageProxy implements SingletonStore {
-  model: {id: string} | null = null;
+  model: {
+    id: string, 
+    // tslint:disable-next-line: no-any
+    rawData?: Dictionary<any>
+  } | null = null;
 
   _getModelForSync(): {id: string} {
     return this.model;
