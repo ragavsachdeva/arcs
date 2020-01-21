@@ -15,7 +15,7 @@
 
 defineParticle(({SimpleParticle, html}) => {
 
-  const template = html`Hello, <span>{{name1}}</span> <span>{{name2}}</span>!
+  const template = html`Hello, <span>{{num1}}</span> + <span>{{num2}}</span>!
   <div slotid="inputSlot1"></div>
   <div slotid="inputSlot2"></div>`;
 
@@ -34,8 +34,8 @@ defineParticle(({SimpleParticle, html}) => {
     render({person1, person2}) {
       // We want the name from person to be interpolated into the template.
       return {
-        name1: person1.name,
-        name2: person2.name
+        num1: person1.num,
+        num2: person2.num
       };
     }
   };

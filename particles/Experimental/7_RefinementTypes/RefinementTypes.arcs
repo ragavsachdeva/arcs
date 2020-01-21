@@ -1,12 +1,8 @@
-// Define a schema that allows us to store a person's name 
-schema Person
-  name: Text
-
 // The DisplayGreeting particle, takes the name passed through the Person
 // handle, and displays a greeting.
 particle DisplayGreeting2 in './source/DisplayGreeting.js'
-  person1: reads Person
-  person2: reads Person
+  person1: reads Person {num: Number [num > 10]}
+  person2: reads Person {num: Number [num > 10]}
   root: consumes
     inputSlot1: provides
     inputSlot2: provides
@@ -15,11 +11,11 @@ particle DisplayGreeting2 in './source/DisplayGreeting.js'
 // the input to the Person handle.
 // This particle also provides a slot to display a greeting to the person.
 particle GetPerson1 in './source/GetPerson.js'
-  person: writes Person
+  person: writes Person {num: Number [num > 20]}
   inputSlot1: consumes
     
 particle GetPerson2 in './source/GetPerson.js'
-  person: writes Person
+  person: writes Person {num: Number [num > 20]}
   inputSlot2: consumes
 
 recipe HandleRecipe2
@@ -38,4 +34,4 @@ recipe HandleRecipe2
     // Pass the output person to the handle recipePerson.
     person: writes recipePerson2 
     inputSlot2: consumes recipeInputSlot2
-  description `Javascript Tutorial 7: RefinementTypes`
+  description `Javascript Tutorial: RefinementTypes`

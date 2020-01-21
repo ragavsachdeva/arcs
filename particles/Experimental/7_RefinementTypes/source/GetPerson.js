@@ -29,13 +29,13 @@ defineParticle(({SimpleParticle, html}) => {
       // case we give person the default value of "Human" so we have a value to
       // work with in the DisplayGreeting particle.
       //debugger;
-      this.set('person', {name: 'Human'});
+      this.set('person', {num: 111});
     }
 
     onNameInputChange(e) {
       // Update the value of person when the human enters a value.
       //debugger;
-      this.set('person', {name: e.data.value});
+      this.set('person', {num: parseInt(e.data.value)});
     }
   };
 });
