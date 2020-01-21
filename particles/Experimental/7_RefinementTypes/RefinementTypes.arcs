@@ -2,7 +2,7 @@
 // handle, and displays a greeting.
 particle DisplayGreeting2 in './source/DisplayGreeting.js'
   person1: reads Person {num: Number [num > 10]}
-  person2: reads Person {num: Number [num > 10]}
+  person2: reads Person {num: Number [num > 20]}
   root: consumes
     inputSlot1: provides
     inputSlot2: provides
@@ -11,11 +11,11 @@ particle DisplayGreeting2 in './source/DisplayGreeting.js'
 // the input to the Person handle.
 // This particle also provides a slot to display a greeting to the person.
 particle GetPerson1 in './source/GetPerson.js'
-  person: writes Person {num: Number [num > 20]}
+  person: writes Person {num: Number [num > 30]}
   inputSlot1: consumes
     
 particle GetPerson2 in './source/GetPerson.js'
-  person: writes Person {num: Number [num > 20]}
+  person: writes Person {num: Number [num > 40], b: Number}
   inputSlot2: consumes
 
 recipe HandleRecipe2
